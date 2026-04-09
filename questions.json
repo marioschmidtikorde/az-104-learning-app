@@ -1,1 +1,25 @@
-
+[
+  {
+    "id": "id-001",
+    "topic": "Identity",
+    "question": "Welche Azure-Rolle ist minimal erforderlich, um Ressourcen in einer Ressourcengruppe zu erstellen?",
+    "choices": ["Reader", "Contributor", "Owner", "User Access Administrator"],
+    "correctIndex": 1,
+    "explanation": "Contributor kann Ressourcen erstellen und verwalten, aber keine Rollen zuweisen. Owner kann zusätzlich Zugriffsverwaltung.",
+    "refs": ["https://learn.microsoft.com/azure/role-based-access-control/built-in-roles"]
+  },
+  {
+    "id": "net-001",
+    "topic": "Networking",
+    "question": "Wofür wird ein Network Security Group (NSG) in Azure primär verwendet?",
+    "choices": [
+      "TLS-Zertifikate verwalten",
+      "Netzwerkverkehr zu Subnetzen/VM-NICs filtern",
+      "DNS-Zonen replizieren",
+      "VNet-Peering automatisieren"
+    ],
+    "correctIndex": 1,
+    "explanation": "NSGs filtern Inbound/Outbound Traffic anhand von Regeln auf Subnet- oder NIC-Ebene.",
+    "refs": ["https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview"]
+  }
+]

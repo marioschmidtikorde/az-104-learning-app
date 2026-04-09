@@ -1,1 +1,111 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AZ-104 Trainer</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; margin: 0; background: #f6f7f9; }
+    .wrap { max-width: 720px; margin: 0 auto; padding: 16px; }
+    .card { background: white; border-radius: 12px; padding: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+    button { width: 100%; padding: 12px; margin-top: 10px; border: 0; border-radius: 10px; font-size: 16px; }
+    .choice { text-align: left; background: #eef2ff; }
+    .choice:disabled { opacity: 0.8; }
+    .ok { background: #dcfce7; }
+    .bad { background: #fee2e2; }
+    .muted { color: #6b7280; font-size: 13px; }
+    .row { display: flex; gap: 10px; }
+    .row > * { flex: 1; }
+    select { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #d1d5db; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="row">
+        <div>
+          <div class="muted">Thema</div>
+          <select id="topic">
+            <option value="">Alle</option>
+            <option>Identity</option>
+            <option>Networking</option>
+            <option>Storage</option>
+            <option>Compute</option>
+            <option>Monitoring</option>
+          </select>
+        </div>
+        <div>
+          <div class="muted">Status</div>
+          <div id="status" class="muted">Bereit</div>
+        </div>
+      </div>
 
+      <h2 id="q" style="margin-top:14px;">AZ-104 Trainer</h2>
+      <div id="choices"></div>
+
+      <div id="result" style="margin-top:12px;"></div>
+      <button id="next">Nächste Frage</button>
+    </div>
+  </div>
+
+  <script>
+    let current = null;
+    const qEl = document.getElementById("q");
+    const choicesEl = document.getElementById("choices");
+    const resultEl = document.getElementById("result");
+    const statusEl = document.getElementById("status");
+    const topicEl = document.getElementById("topic");
+
+    async function loadQuestion() {
+      statusEl.textContent = "Lade Frage...";
+      resultEl.innerHTML = "";
+      choicesEl.innerHTML = "";
+      const topic = topicEl.value;
+      const url = topic ? `/api/question?topic=${encodeURIComponent(topic)}` : "/api/question";
+      const res = await fetch(url);
+      if (!res.ok) {
+        qEl.textContent = "Keine Fragen für dieses Thema.";
+        statusEl.textContent = "Keine Daten";
+        return;
+      }
+      current = await res.json();
+      qEl.textContent = current.question;
+
+      current.choices.forEach((c, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "choice";
+        btn.textContent = c;
+        btn.onclick = () => answer(idx, btn);
+        choicesEl.appendChild(btn);
+      });
+
+      statusEl.textContent = `Thema: ${current.topic}`;
+    }
+
+    async function answer(choiceIndex, clickedBtn) {
+      Array.from(choicesEl.querySelectorAll("button")).forEach(b => b.disabled = true);
+
+      const res = await fetch("/api/answer", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: current.id, choiceIndex })
+      });
+      const data = await res.json();
+
+      const buttons = Array.from(choicesEl.querySelectorAll("button"));
+      buttons[data.correctIndex].classList.add("ok");
+      if (!data.correct) clickedBtn.classList.add("bad");
+
+      resultEl.innerHTML =
+        `<div><strong>${data.correct ? "Richtig" : "Falsch"}</strong></div>
+         <div class="muted" style="margin-top:6px;">${data.explanation}</div>
+         ${data.refs?.length ? `<div class="muted" style="margin-top:6px;">Referenzen: ${data.refs.map(r => `<a href="${r}" target="_blank" rel="noreferrer">${r}</a>`).join(", ")}</div>` : ""}`;
+    }
+
+    document.getElementById("next").onclick = loadQuestion;
+    topicEl.onchange = loadQuestion;
+
+    loadQuestion();
+  </script>
+</body>
+</html>
