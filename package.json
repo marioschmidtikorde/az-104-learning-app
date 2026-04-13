@@ -1,6 +1,6 @@
 {
   "name": "az104-learning-app",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "type": "module",
   "private": true,
   "scripts": {
@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "express": "^4.19.2",
-    "js-yaml": "^4.1.0"
+    "js-yaml": "^4.1.0",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7"
   }
 }

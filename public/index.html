@@ -5,137 +5,221 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AZ-104 Trainer</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 16px;
-      line-height: 1.5;
-    }
-    .row {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-    .card {
-      border: 1px solid #d0d7de;
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-    button {
-      cursor: pointer;
-      padding: 10px 14px;
-    }
-    .choices {
-      display: grid;
-      gap: 10px;
-      margin-top: 16px;
-    }
-    .choices button {
-      text-align: left;
-    }
-    .muted {
-      color: #57606a;
-    }
-    .ok {
-      color: #1a7f37;
-      font-weight: 700;
-    }
-    .bad {
-      color: #cf222e;
-      font-weight: 700;
-    }
-    ul {
-      padding-left: 20px;
-    }
+    body { font-family: Arial, sans-serif; max-width: 1100px; margin: 32px auto; padding: 0 16px; line-height: 1.4; }
+    .grid { display: grid; gap: 16px; }
+    .grid-2 { grid-template-columns: 1fr 1fr; }
+    .card { border: 1px solid #d0d7de; border-radius: 10px; padding: 16px; background: #fff; }
+    h1, h2, h3 { margin-top: 0; }
+    button, select, input { padding: 10px 12px; font: inherit; }
+    button { cursor: pointer; }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+    .choices { display: grid; gap: 10px; margin-top: 16px; }
+    .choices button { text-align: left; }
+    .muted { color: #57606a; }
+    .ok { color: #1a7f37; font-weight: 700; }
+    .bad { color: #cf222e; font-weight: 700; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border-bottom: 1px solid #d8dee4; padding: 8px 6px; text-align: left; vertical-align: top; }
+    .pill { display: inline-block; border: 1px solid #d0d7de; border-radius: 999px; padding: 3px 10px; margin: 2px 6px 2px 0; font-size: 0.9rem; }
+    .summary-number { font-size: 1.5rem; font-weight: 700; }
   </style>
 </head>
 <body>
   <h1>AZ-104 Trainer</h1>
 
-  <div class="row">
-    <label for="topicSelect">Topic</label>
-    <select id="topicSelect">
-      <option value="">All</option>
-    </select>
-    <button id="nextBtn">Next question</button>
+  <div class="grid grid-2">
+    <section class="card">
+      <h2>Start learning session</h2>
+      <div class="row">
+        <label for="modeSelect">Mode</label>
+        <select id="modeSelect">
+          <option value="practice">Practice</option>
+          <option value="exam">Exam</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="questionCountInput">Question count</label>
+        <input id="questionCountInput" type="number" min="1" value="10" />
+      </div>
+      <div class="row">
+        <label for="cutPercentInput">Cut (%)</label>
+        <input id="cutPercentInput" type="number" min="1" max="100" value="70" />
+      </div>
+      <div class="row">
+        <div>
+          <div class="muted">Domains</div>
+          <div id="domainFilters"></div>
+        </div>
+      </div>
+      <div class="row">
+        <button id="startSessionBtn">Start session</button>
+        <button id="loadStatsBtn">Refresh statistics</button>
+        <button id="loadHistoryBtn">Refresh history</button>
+      </div>
+      <div class="muted" id="sessionSetupStatus">Ready</div>
+    </section>
+
+    <section class="card">
+      <h2>Overview</h2>
+      <div class="grid grid-2">
+        <div><div class="muted">Total sessions</div><div class="summary-number" id="overviewSessions">0</div></div>
+        <div><div class="muted">Overall accuracy</div><div class="summary-number" id="overviewAccuracy">0%</div></div>
+        <div><div class="muted">Exam sessions</div><div class="summary-number" id="overviewExamSessions">0</div></div>
+        <div><div class="muted">Exam pass rate</div><div class="summary-number" id="overviewExamPassRate">0%</div></div>
+      </div>
+      <div class="muted" style="margin-top: 12px;">Domain performance</div>
+      <div id="domainStats">No data yet.</div>
+    </section>
   </div>
 
-  <div class="card">
-    <div class="muted">Status</div>
-    <div id="status">Ready</div>
-  </div>
-
-  <div class="card">
-    <div class="muted">Topic</div>
+  <section class="card" style="margin-top: 16px;">
+    <h2>Current session</h2>
+    <div class="muted">Session status</div>
+    <div id="currentSessionStatus">No session running.</div>
+    <div style="margin-top: 12px;" class="muted">Progress</div>
+    <div id="currentSessionProgress">-</div>
+    <div style="margin-top: 12px;" class="muted">Topic</div>
     <div id="topic">-</div>
-
-    <h2 id="question">Press "Next question" to begin.</h2>
-
+    <h3 id="question">Start a session to begin.</h3>
     <div id="choices" class="choices"></div>
-  </div>
-
-  <div class="card">
-    <div class="muted">Result</div>
+    <div style="margin-top: 16px;" class="muted">Result</div>
     <div id="result">-</div>
     <p id="explanation"></p>
     <div id="refs"></div>
-  </div>
+    <div style="margin-top: 16px;">
+      <button id="nextBtn" disabled>Next question</button>
+      <button id="completeBtn" disabled>Complete session</button>
+    </div>
+  </section>
+
+  <section class="card" style="margin-top: 16px;">
+    <h2>Session summary</h2>
+    <div id="sessionSummary">No completed session yet.</div>
+  </section>
+
+  <section class="card" style="margin-top: 16px;">
+    <h2>Session history</h2>
+    <div id="historyTable">No sessions yet.</div>
+  </section>
 
   <script>
-    const topicSelect = document.getElementById("topicSelect");
-    const nextBtn = document.getElementById("nextBtn");
-    const statusEl = document.getElementById("status");
+    const modeSelect = document.getElementById("modeSelect");
+    const questionCountInput = document.getElementById("questionCountInput");
+    const cutPercentInput = document.getElementById("cutPercentInput");
+    const domainFilters = document.getElementById("domainFilters");
+    const startSessionBtn = document.getElementById("startSessionBtn");
+    const loadStatsBtn = document.getElementById("loadStatsBtn");
+    const loadHistoryBtn = document.getElementById("loadHistoryBtn");
+    const sessionSetupStatus = document.getElementById("sessionSetupStatus");
+    const currentSessionStatus = document.getElementById("currentSessionStatus");
+    const currentSessionProgress = document.getElementById("currentSessionProgress");
     const topicEl = document.getElementById("topic");
     const questionEl = document.getElementById("question");
     const choicesEl = document.getElementById("choices");
     const resultEl = document.getElementById("result");
     const explanationEl = document.getElementById("explanation");
     const refsEl = document.getElementById("refs");
+    const nextBtn = document.getElementById("nextBtn");
+    const completeBtn = document.getElementById("completeBtn");
+    const overviewSessions = document.getElementById("overviewSessions");
+    const overviewAccuracy = document.getElementById("overviewAccuracy");
+    const overviewExamSessions = document.getElementById("overviewExamSessions");
+    const overviewExamPassRate = document.getElementById("overviewExamPassRate");
+    const domainStats = document.getElementById("domainStats");
+    const historyTable = document.getElementById("historyTable");
+    const sessionSummary = document.getElementById("sessionSummary");
 
-    let currentQuestion = null;
+    let activeSession = null;
+    let currentIndex = 0;
+    let answerLocked = false;
+    let questionStartedAt = null;
+
+    function getSelectedDomains() {
+      return Array.from(document.querySelectorAll('input[name="domainFilter"]:checked')).map((el) => el.value);
+    }
+
+    function renderDomainFilters(topics) {
+      domainFilters.innerHTML = "";
+      topics.forEach((topic) => {
+        const label = document.createElement("label");
+        label.className = "pill";
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.name = "domainFilter";
+        input.value = topic;
+        input.style.marginRight = "6px";
+        label.appendChild(input);
+        label.appendChild(document.createTextNode(topic));
+        domainFilters.appendChild(label);
+      });
+    }
 
     async function loadTopics() {
       const res = await fetch("/api/topics");
       const data = await res.json();
-
-      for (const topic of data.topics) {
-        const option = document.createElement("option");
-        option.value = topic;
-        option.textContent = topic;
-        topicSelect.appendChild(option);
-      }
+      renderDomainFilters(data.topics);
     }
 
-    async function nextQuestion() {
-      resultEl.textContent = "-";
-      explanationEl.textContent = "";
+    function renderRefs(refs) {
       refsEl.innerHTML = "";
-      statusEl.textContent = "Loading...";
+      if (!Array.isArray(refs) || !refs.length) return;
+      const title = document.createElement("div");
+      title.className = "muted";
+      title.textContent = "References";
+      refsEl.appendChild(title);
+      const list = document.createElement("ul");
+      refs.forEach((ref) => {
+        const item = document.createElement("li");
+        if (typeof ref === "string" && ref.startsWith("http")) {
+          const link = document.createElement("a");
+          link.href = ref;
+          link.target = "_blank";
+          link.rel = "noreferrer";
+          link.textContent = ref;
+          item.appendChild(link);
+        } else {
+          item.textContent = ref;
+        }
+        list.appendChild(item);
+      });
+      refsEl.appendChild(list);
+    }
 
-      const topic = topicSelect.value;
-      const url = topic
-        ? `/api/question?topic=${encodeURIComponent(topic)}`
-        : "/api/question";
-
-      const res = await fetch(url);
-
-      if (!res.ok) {
-        const error = await res.json();
-        statusEl.textContent = error.error || "Failed to load question.";
+    function renderCurrentQuestion() {
+      if (!activeSession) {
+        topicEl.textContent = "-";
+        questionEl.textContent = "Start a session to begin.";
+        choicesEl.innerHTML = "";
+        currentSessionProgress.textContent = "-";
+        nextBtn.disabled = true;
+        completeBtn.disabled = true;
         return;
       }
 
-      currentQuestion = await res.json();
-      topicEl.textContent = currentQuestion.topic;
-      questionEl.textContent = currentQuestion.question;
-      choicesEl.innerHTML = "";
-      statusEl.textContent = "Question loaded.";
+      const question = activeSession.questions[currentIndex];
+      if (!question) {
+        questionEl.textContent = "No more questions in this session.";
+        choicesEl.innerHTML = "";
+        nextBtn.disabled = true;
+        completeBtn.disabled = false;
+        return;
+      }
 
-      currentQuestion.choices.forEach((choice, index) => {
+      answerLocked = false;
+      questionStartedAt = Date.now();
+      topicEl.textContent = question.topic;
+      questionEl.textContent = question.question;
+      currentSessionStatus.textContent = `Session ${activeSession.sessionId} (${activeSession.mode})`;
+      currentSessionProgress.textContent = `Question ${currentIndex + 1} of ${activeSession.questions.length}`;
+      resultEl.textContent = "-";
+      resultEl.className = "";
+      explanationEl.textContent = "";
+      refsEl.innerHTML = "";
+      choicesEl.innerHTML = "";
+      nextBtn.disabled = true;
+      completeBtn.disabled = false;
+
+      question.choices.forEach((choice, index) => {
         const btn = document.createElement("button");
         btn.textContent = choice;
         btn.onclick = () => submitAnswer(index);
@@ -143,53 +227,217 @@
       });
     }
 
-    async function submitAnswer(choiceIndex) {
-      if (!currentQuestion) return;
-
-      const res = await fetch("/api/answer", {
+    async function startSession() {
+      sessionSetupStatus.textContent = "Creating session...";
+      const res = await fetch("/api/sessions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          id: currentQuestion.id,
-          choiceIndex
+          mode: modeSelect.value,
+          questionCount: Number(questionCountInput.value),
+          cutPercent: Number(cutPercentInput.value),
+          domains: getSelectedDomains()
         })
       });
 
       const data = await res.json();
+      if (!res.ok) {
+        sessionSetupStatus.textContent = data.error || "Failed to create session.";
+        return;
+      }
+
+      activeSession = data;
+      currentIndex = 0;
+      sessionSetupStatus.textContent = `Session ${data.sessionId} created.`;
+      sessionSummary.textContent = "Session is running.";
+      renderCurrentQuestion();
+      await loadHistory();
+    }
+
+    async function submitAnswer(selectedChoiceIndex) {
+      if (!activeSession || answerLocked) return;
+
+      answerLocked = true;
+      Array.from(choicesEl.querySelectorAll("button")).forEach((btn) => {
+        btn.disabled = true;
+      });
+
+      const currentQuestion = activeSession.questions[currentIndex];
+      const responseTimeMs = questionStartedAt ? Date.now() - questionStartedAt : null;
+
+      const res = await fetch(`/api/sessions/${encodeURIComponent(activeSession.sessionId)}/answers`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          questionId: currentQuestion.id,
+          selectedChoiceIndex,
+          responseTimeMs
+        })
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        resultEl.textContent = data.error || "Failed to submit answer.";
+        resultEl.className = "bad";
+        return;
+      }
 
       resultEl.textContent = data.correct ? "Correct" : "Incorrect";
       resultEl.className = data.correct ? "ok" : "bad";
       explanationEl.textContent = data.explanation || "";
+      renderRefs(data.refs);
 
-      if (Array.isArray(data.refs) && data.refs.length) {
-        const title = document.createElement("div");
-        title.className = "muted";
-        title.textContent = "References";
-        refsEl.appendChild(title);
-
-        const list = document.createElement("ul");
-        for (const ref of data.refs) {
-          const item = document.createElement("li");
-          if (typeof ref === "string" && ref.startsWith("http")) {
-            const link = document.createElement("a");
-            link.href = ref;
-            link.target = "_blank";
-            link.rel = "noreferrer";
-            link.textContent = ref;
-            item.appendChild(link);
-          } else {
-            item.textContent = ref;
-          }
-          list.appendChild(item);
-        }
-        refsEl.appendChild(list);
+      if (data.session && data.session.status === "completed") {
+        currentSessionStatus.textContent = `Session ${activeSession.sessionId} completed.`;
+        nextBtn.disabled = true;
+        completeBtn.disabled = true;
+        await loadSessionSummary(activeSession.sessionId);
+        await loadStats();
+        await loadHistory();
+      } else {
+        nextBtn.disabled = currentIndex >= activeSession.questions.length - 1;
+        completeBtn.disabled = false;
       }
     }
 
-    nextBtn.addEventListener("click", nextQuestion);
+    async function completeSession() {
+      if (!activeSession) return;
 
-    loadTopics().catch((err) => {
-      statusEl.textContent = `Failed to load topics: ${err.message}`;
+      const res = await fetch(`/api/sessions/${encodeURIComponent(activeSession.sessionId)}/complete`, {
+        method: "POST"
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        sessionSummary.textContent = data.error || "Failed to complete session.";
+        return;
+      }
+
+      currentSessionStatus.textContent = `Session ${activeSession.sessionId} completed.`;
+      nextBtn.disabled = true;
+      completeBtn.disabled = true;
+      await loadSessionSummary(activeSession.sessionId);
+      await loadStats();
+      await loadHistory();
+    }
+
+    async function loadStats() {
+      const res = await fetch("/api/stats/overview");
+      const data = await res.json();
+      overviewSessions.textContent = data.totalSessions;
+      overviewAccuracy.textContent = `${data.overallAccuracyPercent}%`;
+      overviewExamSessions.textContent = data.examSessions;
+      overviewExamPassRate.textContent = `${data.examPassRatePercent}%`;
+
+      if (!Array.isArray(data.domains) || !data.domains.length) {
+        domainStats.textContent = "No domain statistics yet.";
+        return;
+      }
+
+      const table = document.createElement("table");
+      table.innerHTML = '<thead><tr><th>Domain</th><th>Answered</th><th>Correct</th><th>Accuracy</th></tr></thead><tbody></tbody>';
+      const tbody = table.querySelector("tbody");
+
+      data.domains.forEach((row) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td>${row.domain}</td><td>${row.answeredCount}</td><td>${row.correctCount}</td><td>${row.accuracyPercent}%</td>`;
+        tbody.appendChild(tr);
+      });
+
+      domainStats.innerHTML = "";
+      domainStats.appendChild(table);
+    }
+
+    async function loadHistory() {
+      const res = await fetch("/api/sessions?limit=20");
+      const data = await res.json();
+
+      if (!Array.isArray(data.sessions) || !data.sessions.length) {
+        historyTable.textContent = "No sessions yet.";
+        return;
+      }
+
+      const table = document.createElement("table");
+      table.innerHTML = '<thead><tr><th>Started</th><th>Mode</th><th>Domains</th><th>Answered</th><th>Score</th><th>Cut</th><th>Passed</th><th>Status</th></tr></thead><tbody></tbody>';
+      const tbody = table.querySelector("tbody");
+
+      data.sessions.forEach((session) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${new Date(session.startedAt).toLocaleString()}</td>
+          <td>${session.mode}</td>
+          <td>${session.domains.length ? session.domains.join(", ") : "All"}</td>
+          <td>${session.answeredCount}/${session.questionCount}</td>
+          <td>${session.scorePercent}%</td>
+          <td>${session.cutPercent}%</td>
+          <td>${session.passed === null ? "-" : (session.passed ? "Yes" : "No")}</td>
+          <td>${session.status}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      historyTable.innerHTML = "";
+      historyTable.appendChild(table);
+    }
+
+    async function loadSessionSummary(sessionId) {
+      const res = await fetch(`/api/sessions/${encodeURIComponent(sessionId)}`);
+      const data = await res.json();
+
+      if (!res.ok) {
+        sessionSummary.textContent = data.error || "Failed to load session summary.";
+        return;
+      }
+
+      const session = data.session;
+      let html = `
+        <div><strong>Session:</strong> ${session.id}</div>
+        <div><strong>Mode:</strong> ${session.mode}</div>
+        <div><strong>Answered:</strong> ${session.answeredCount}/${session.questionCount}</div>
+        <div><strong>Score:</strong> ${session.scorePercent}%</div>
+        <div><strong>Cut:</strong> ${session.cutPercent}%</div>
+        <div><strong>Passed:</strong> ${session.passed === null ? "-" : (session.passed ? "Yes" : "No")}</div>
+      `;
+
+      if (Array.isArray(data.domainBreakdown) && data.domainBreakdown.length) {
+        html += "<div style=\"margin-top: 8px;\"><strong>Domain breakdown</strong></div><ul>";
+        data.domainBreakdown.forEach((row) => {
+          html += `<li>${row.domain}: ${row.correctCount}/${row.answeredCount} (${row.accuracyPercent}%)</li>`;
+        });
+        html += "</ul>";
+      }
+
+      sessionSummary.innerHTML = html;
+    }
+
+    nextBtn.addEventListener("click", () => {
+      if (!activeSession) return;
+      currentIndex += 1;
+      renderCurrentQuestion();
+    });
+
+    completeBtn.addEventListener("click", () => completeSession().catch((err) => {
+      sessionSummary.textContent = `Failed to complete session: ${err.message}`;
+    }));
+
+    startSessionBtn.addEventListener("click", () => startSession().catch((err) => {
+      sessionSetupStatus.textContent = `Failed to create session: ${err.message}`;
+    }));
+
+    loadStatsBtn.addEventListener("click", () => loadStats().catch((err) => {
+      domainStats.textContent = `Failed to load statistics: ${err.message}`;
+    }));
+
+    loadHistoryBtn.addEventListener("click", () => loadHistory().catch((err) => {
+      historyTable.textContent = `Failed to load history: ${err.message}`;
+    }));
+
+    modeSelect.addEventListener("change", () => {
+      questionCountInput.value = modeSelect.value === "exam" ? "20" : "10";
+    });
+
+    Promise.all([loadTopics(), loadStats(), loadHistory()]).catch((err) => {
+      sessionSetupStatus.textContent = `Startup failed: ${err.message}`;
     });
   </script>
 </body>
