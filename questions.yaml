@@ -1,0 +1,889 @@
+metadata:
+  name: AZ-104 Learning App Question Bank
+  exam: AZ-104 Microsoft Azure Administrator
+  language: en
+  generated_on: '2026-04-13'
+  question_count: 51
+  source_policy: 'Questions are aligned to Microsoft Learn AZ-104 learning paths and the official AZ-104 study guide. Additional custom domains: Scalability and Operational Awareness.'
+  domains:
+  - Identity
+  - Storage
+  - Compute
+  - Networking
+  - Monitoring
+  - Scalability
+  - Operational Awareness
+  learning_paths:
+  - 'AZ-104: Manage identities and governance in Azure'
+  - 'AZ-104: Implement and manage storage in Azure'
+  - 'AZ-104: Deploy and manage Azure compute resources'
+  - 'AZ-104: Configure and manage virtual networks for Azure administrators'
+  - 'AZ-104: Monitor and back up Azure resources'
+questions:
+- id: AZ104-001
+  language: en
+  domain: Identity
+  learning_path: Manage identities and governance
+  topic: RBAC
+  question: Which built-in Azure role provides the minimum permissions required to create and manage most resources in a resource group, but does not allow delegation of access?
+  choices:
+  - Reader
+  - Contributor
+  - Owner
+  - User Access Administrator
+  correct_answer_index: 1
+  correct_answer: Contributor
+  explanation: Contributor can create and manage resources but cannot grant access. Owner includes Contributor permissions plus the ability to manage access.
+  source:
+    title: 'AZ-104: Manage identities and governance in Azure'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-identities-governance/
+- id: AZ104-002
+  language: en
+  domain: Identity
+  learning_path: Manage identities and governance
+  topic: RBAC
+  question: Which Azure feature should you use to grant a user temporary, time-bound elevation to a privileged role such as Global Administrator or Privileged Role Administrator?
+  choices:
+  - Conditional Access
+  - Privileged Identity Management
+  - Management groups
+  - Administrative units
+  correct_answer_index: 1
+  correct_answer: Privileged Identity Management
+  explanation: Microsoft Entra Privileged Identity Management supports just-in-time and time-bound activation for privileged roles.
+  source:
+    title: 'AZ-104: Manage identities and governance in Azure'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-identities-governance/
+- id: AZ104-003
+  language: en
+  domain: Identity
+  learning_path: Manage identities and governance
+  topic: Scopes
+  question: At which scope can you assign Azure RBAC roles?
+  choices:
+  - Only at the subscription scope
+  - Only at the resource group and resource scopes
+  - At management group, subscription, resource group, and resource scopes
+  - Only at the resource scope
+  correct_answer_index: 2
+  correct_answer: At management group, subscription, resource group, and resource scopes
+  explanation: Azure RBAC assignments can be inherited down the hierarchy from management group to resource.
+  source:
+    title: 'AZ-104: Manage identities and governance in Azure'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-identities-governance/
+- id: AZ104-004
+  language: en
+  domain: Identity
+  learning_path: Manage identities and governance
+  topic: Subscriptions and governance
+  question: You need to ensure a standard tag is automatically added or remediated on resources that are missing it. Which Azure governance feature is designed for this?
+  choices:
+  - Azure Policy
+  - Network Security Group
+  - Resource lock
+  - Azure Monitor
+  correct_answer_index: 0
+  correct_answer: Azure Policy
+  explanation: Azure Policy can enforce standards and, with modify or deployIfNotExists effects, remediate noncompliant resources.
+  source:
+    title: 'AZ-104: Manage identities and governance in Azure'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-identities-governance/
+- id: AZ104-005
+  language: en
+  domain: Identity
+  learning_path: Manage identities and governance
+  topic: Resource locks
+  question: Which lock type prevents deletion of a resource but still allows updates to the resource configuration?
+  choices:
+  - ReadOnly
+  - CanNotDelete
+  - DeleteOnly
+  - Immutable
+  correct_answer_index: 1
+  correct_answer: CanNotDelete
+  explanation: A CanNotDelete lock blocks deletion but permits authorized modification. ReadOnly blocks both write and delete operations that require POST/PUT/PATCH/DELETE.
+  source:
+    title: 'AZ-104: Manage identities and governance in Azure'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-identities-governance/
+- id: AZ104-006
+  language: en
+  domain: Identity
+  learning_path: Manage identities and governance
+  topic: Management groups
+  question: What is the primary purpose of Azure management groups?
+  choices:
+  - To replicate resources across regions
+  - To organize subscriptions for policy and access inheritance
+  - To group virtual machines for availability
+  - To isolate workloads at the network layer
+  correct_answer_index: 1
+  correct_answer: To organize subscriptions for policy and access inheritance
+  explanation: Management groups let you apply governance controls such as RBAC and Azure Policy across multiple subscriptions.
+  source:
+    title: AZ-104 study guide
+    url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+- id: AZ104-007
+  language: en
+  domain: Identity
+  learning_path: Manage identities and governance
+  topic: Conditional Access
+  question: Which control is most appropriate when you need to require multifactor authentication for administrators accessing the Azure portal?
+  choices:
+  - Resource locks
+  - Conditional Access policy
+  - Azure Policy initiative
+  - Management group
+  correct_answer_index: 1
+  correct_answer: Conditional Access policy
+  explanation: Conditional Access evaluates sign-in conditions and can require MFA for targeted users, apps, or roles.
+  source:
+    title: 'AZ-104: Manage identities and governance in Azure'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-identities-governance/
+- id: AZ104-008
+  language: en
+  domain: Identity
+  learning_path: Manage identities and governance
+  topic: Groups
+  question: Which group type in Microsoft Entra ID is specifically designed to grant access permissions to resources?
+  choices:
+  - Security group
+  - Microsoft 365 group
+  - Mail-enabled distribution group
+  - Administrative unit
+  correct_answer_index: 0
+  correct_answer: Security group
+  explanation: Security groups are used for access control. Microsoft 365 groups focus on collaboration workloads.
+  source:
+    title: 'AZ-104: Manage identities and governance in Azure'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-identities-governance/
+- id: AZ104-009
+  language: en
+  domain: Storage
+  learning_path: Implement and manage storage in Azure
+  topic: Storage accounts
+  question: Which replication option keeps three synchronous copies in a single primary region and three additional copies in a paired secondary region?
+  choices:
+  - LRS
+  - ZRS
+  - GRS
+  - GZRS
+  correct_answer_index: 2
+  correct_answer: GRS
+  explanation: Geo-redundant storage uses LRS in the primary region plus asynchronous replication to a secondary region.
+  source:
+    title: Configure Storage Accounts
+    url: https://learn.microsoft.com/en-us/training/modules/configure-storage-accounts/
+- id: AZ104-010
+  language: en
+  domain: Storage
+  learning_path: Implement and manage storage in Azure
+  topic: Storage accounts
+  question: Which replication option is designed to keep data available even if a single datacenter in the primary region fails, without relying on a secondary region?
+  choices:
+  - LRS
+  - ZRS
+  - GRS
+  - RA-GRS
+  correct_answer_index: 1
+  correct_answer: ZRS
+  explanation: Zone-redundant storage synchronously replicates data across availability zones in the primary region.
+  source:
+    title: Configure Storage Accounts
+    url: https://learn.microsoft.com/en-us/training/modules/configure-storage-accounts/
+- id: AZ104-011
+  language: en
+  domain: Storage
+  learning_path: Implement and manage storage in Azure
+  topic: Blob access
+  question: Which blob access tier is optimized for data that is accessed frequently?
+  choices:
+  - Archive
+  - Cool
+  - Hot
+  - Premium
+  correct_answer_index: 2
+  correct_answer: Hot
+  explanation: The Hot tier is intended for frequently accessed data; Cool and Archive target less frequent access.
+  source:
+    title: 'AZ-104: Implement and manage storage in Azure'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-storage/
+- id: AZ104-012
+  language: en
+  domain: Storage
+  learning_path: Implement and manage storage in Azure
+  topic: Security
+  question: You need to grant limited-time access to a specific blob without exposing the account key. What should you use?
+  choices:
+  - Storage account key
+  - Shared Access Signature
+  - Azure Policy
+  - Resource lock
+  correct_answer_index: 1
+  correct_answer: Shared Access Signature
+  explanation: A SAS delegates constrained access to storage resources with scoped permissions and an expiry time.
+  source:
+    title: 'AZ-104: Implement and manage storage in Azure'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-storage/
+- id: AZ104-013
+  language: en
+  domain: Storage
+  learning_path: Implement and manage storage in Azure
+  topic: File services
+  question: Which Azure storage service provides SMB-based file shares that can be mounted concurrently by cloud or on-premises systems?
+  choices:
+  - Azure Blobs
+  - Azure Queues
+  - Azure Files
+  - Azure Tables
+  correct_answer_index: 2
+  correct_answer: Azure Files
+  explanation: Azure Files exposes managed file shares over SMB and also supports NFS in selected scenarios.
+  source:
+    title: 'AZ-104: Implement and manage storage in Azure'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-storage/
+- id: AZ104-014
+  language: en
+  domain: Storage
+  learning_path: Implement and manage storage in Azure
+  topic: Data protection
+  question: Which feature helps protect blobs from accidental or malicious deletion by preserving previous states for a retention period?
+  choices:
+  - Azure Bastion
+  - Blob versioning
+  - NSG flow logs
+  - Management groups
+  correct_answer_index: 1
+  correct_answer: Blob versioning
+  explanation: Blob versioning maintains prior versions so objects can be restored after overwrite or deletion scenarios.
+  source:
+    title: 'AZ-104: Implement and manage storage in Azure'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-storage/
+- id: AZ104-015
+  language: en
+  domain: Storage
+  learning_path: Implement and manage storage in Azure
+  topic: Network access
+  question: You need a storage account to be reachable only from selected virtual networks and public IP ranges. Which configuration should you use?
+  choices:
+  - RBAC role assignment
+  - Storage firewall and virtual network rules
+  - A resource lock
+  - Availability zones
+  correct_answer_index: 1
+  correct_answer: Storage firewall and virtual network rules
+  explanation: Storage firewalls and virtual network rules restrict public endpoint access to allowed networks and IPs.
+  source:
+    title: Configure Storage Accounts
+    url: https://learn.microsoft.com/en-us/training/modules/configure-storage-accounts/
+- id: AZ104-016
+  language: en
+  domain: Storage
+  learning_path: Implement and manage storage in Azure
+  topic: Data movement
+  question: Which Azure service is commonly used to transfer large amounts of existing on-premises data into Azure Storage over the network?
+  choices:
+  - Azure Migrate
+  - AzCopy
+  - Application Gateway
+  - Azure Policy
+  correct_answer_index: 1
+  correct_answer: AzCopy
+  explanation: AzCopy is a command-line tool optimized for high-performance copy operations to and from Azure Storage.
+  source:
+    title: 'AZ-104: Implement and manage storage in Azure'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-storage/
+- id: AZ104-017
+  language: en
+  domain: Compute
+  learning_path: Deploy and manage Azure compute resources
+  topic: Virtual machines
+  question: Which Azure service provides a browser-based management session to a VM over TLS without exposing an inbound RDP or SSH port on the VM?
+  choices:
+  - Azure Load Balancer
+  - Azure Bastion
+  - Azure Firewall
+  - Azure DNS
+  correct_answer_index: 1
+  correct_answer: Azure Bastion
+  explanation: Azure Bastion provides secure portal-based RDP/SSH access without public RDP/SSH exposure on the VM.
+  source:
+    title: 'AZ-104: Deploy and manage Azure compute resources'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-compute-resources/
+- id: AZ104-018
+  language: en
+  domain: Compute
+  learning_path: Deploy and manage Azure compute resources
+  topic: VM disks
+  question: What is the main benefit of using managed disks for Azure virtual machines?
+  choices:
+  - They require you to manage storage accounts manually
+  - They eliminate the need to manage storage account limits for VM disks
+  - They can only be used with availability sets
+  - They disable encryption options
+  correct_answer_index: 1
+  correct_answer: They eliminate the need to manage storage account limits for VM disks
+  explanation: Managed disks abstract storage account management and simplify scale, availability, and backup integration.
+  source:
+    title: Introduction to Azure virtual machines
+    url: https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/
+- id: AZ104-019
+  language: en
+  domain: Compute
+  learning_path: Deploy and manage Azure compute resources
+  topic: Containers
+  question: Which Azure service is best suited for running simple container workloads without managing the underlying orchestrator or VM infrastructure?
+  choices:
+  - Azure Kubernetes Service
+  - Azure Container Instances
+  - Virtual Machine Scale Sets
+  - Azure Batch
+  correct_answer_index: 1
+  correct_answer: Azure Container Instances
+  explanation: Azure Container Instances provides serverless container execution for straightforward containerized workloads.
+  source:
+    title: 'AZ-104: Deploy and manage Azure compute resources'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-compute-resources/
+- id: AZ104-020
+  language: en
+  domain: Compute
+  learning_path: Deploy and manage Azure compute resources
+  topic: App Service
+  question: Which Azure PaaS offering is specifically designed to host web applications, REST APIs, and mobile back ends?
+  choices:
+  - Azure Functions
+  - Azure App Service
+  - Azure Virtual Desktop
+  - Azure NetApp Files
+  correct_answer_index: 1
+  correct_answer: Azure App Service
+  explanation: Azure App Service is the core PaaS platform for web apps and APIs in AZ-104 scope.
+  source:
+    title: Configure Azure App Service Plans
+    url: https://learn.microsoft.com/en-us/training/modules/configure-app-service-plans/
+- id: AZ104-021
+  language: en
+  domain: Compute
+  learning_path: Deploy and manage Azure compute resources
+  topic: VM sizing
+  question: What is vertical scaling in the context of Azure virtual machines?
+  choices:
+  - Increasing the number of VM instances
+  - Changing the VM size to one with more CPU or memory
+  - Adding another availability zone
+  - Migrating the VM to App Service
+  correct_answer_index: 1
+  correct_answer: Changing the VM size to one with more CPU or memory
+  explanation: Vertical scaling means scale up or down by changing the SKU size of a single VM.
+  source:
+    title: Configure Virtual Machine Availability
+    url: https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/
+- id: AZ104-022
+  language: en
+  domain: Compute
+  learning_path: Deploy and manage Azure compute resources
+  topic: Automation
+  question: Which feature allows you to inject scripts or agents into Azure VMs after deployment for configuration or management tasks?
+  choices:
+  - Management groups
+  - VM extensions
+  - Route tables
+  - Private endpoints
+  correct_answer_index: 1
+  correct_answer: VM extensions
+  explanation: VM extensions run post-deployment tasks such as DSC, antimalware, custom scripts, and monitoring agents.
+  source:
+    title: Introduction to Azure virtual machines
+    url: https://learn.microsoft.com/en-us/training/modules/intro-to-azure-virtual-machines/
+- id: AZ104-023
+  language: en
+  domain: Compute
+  learning_path: Deploy and manage Azure compute resources
+  topic: Availability
+  question: You need to minimize the impact of planned and unplanned host maintenance for multiple VMs in the same region. Which design is most aligned with that goal?
+  choices:
+  - Put all VMs in one subnet only
+  - Use availability zones or availability sets as appropriate
+  - Assign Reader role to the VMs
+  - Use a management group
+  correct_answer_index: 1
+  correct_answer: Use availability zones or availability sets as appropriate
+  explanation: Availability sets and availability zones distribute VMs across fault and update boundaries, improving resiliency.
+  source:
+    title: Configure Virtual Machine Availability
+    url: https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/
+- id: AZ104-024
+  language: en
+  domain: Compute
+  learning_path: Deploy and manage Azure compute resources
+  topic: Images
+  question: What is the primary purpose of a generalized VM image in Azure?
+  choices:
+  - To create backups of a running VM
+  - To deploy multiple new VMs with a common baseline configuration
+  - To convert a VM into a storage account
+  - To enable site-to-site VPN
+  correct_answer_index: 1
+  correct_answer: To deploy multiple new VMs with a common baseline configuration
+  explanation: A generalized image is used as a reusable source for consistent VM deployments.
+  source:
+    title: 'AZ-104: Deploy and manage Azure compute resources'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-compute-resources/
+- id: AZ104-025
+  language: en
+  domain: Networking
+  learning_path: Configure and manage virtual networks for Azure administrators
+  topic: VNets
+  question: Which Azure resource defines the IP address space and logical isolation boundary for Azure resources?
+  choices:
+  - Subnet
+  - Virtual network
+  - Network interface
+  - Route table
+  correct_answer_index: 1
+  correct_answer: Virtual network
+  explanation: A virtual network is the core network boundary; subnets are subdivisions within it.
+  source:
+    title: 'AZ-104: Configure and manage virtual networks for Azure administrators'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-virtual-networks/
+- id: AZ104-026
+  language: en
+  domain: Networking
+  learning_path: Configure and manage virtual networks for Azure administrators
+  topic: Subnets
+  question: What is the main purpose of subnetting within an Azure virtual network?
+  choices:
+  - To create DNS zones
+  - To divide the VNet address space into smaller network segments
+  - To assign RBAC roles
+  - To enable blob versioning
+  correct_answer_index: 1
+  correct_answer: To divide the VNet address space into smaller network segments
+  explanation: Subnets organize workloads and allow differentiated routing, security, and service delegation.
+  source:
+    title: 'AZ-104: Configure and manage virtual networks for Azure administrators'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-virtual-networks/
+- id: AZ104-027
+  language: en
+  domain: Networking
+  learning_path: Configure and manage virtual networks for Azure administrators
+  topic: NSG
+  question: Which Azure resource filters inbound and outbound traffic to network interfaces or subnets by using security rules?
+  choices:
+  - Load balancer
+  - Network security group
+  - Route table
+  - Private DNS zone
+  correct_answer_index: 1
+  correct_answer: Network security group
+  explanation: Network security groups evaluate 5-tuple traffic rules and can be associated with NICs or subnets.
+  source:
+    title: 'AZ-104: Configure and manage virtual networks for Azure administrators'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-virtual-networks/
+- id: AZ104-028
+  language: en
+  domain: Networking
+  learning_path: Configure and manage virtual networks for Azure administrators
+  topic: Peering
+  question: What is a key benefit of virtual network peering?
+  choices:
+  - It encrypts all VM disks
+  - It connects VNets with low-latency traffic over the Microsoft backbone
+  - It replaces NSGs
+  - It provides internet-facing NAT by default
+  correct_answer_index: 1
+  correct_answer: It connects VNets with low-latency traffic over the Microsoft backbone
+  explanation: VNet peering privately connects VNets and preserves high-throughput, low-latency communication.
+  source:
+    title: 'AZ-104: Configure and manage virtual networks for Azure administrators'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-virtual-networks/
+- id: AZ104-029
+  language: en
+  domain: Networking
+  learning_path: Configure and manage virtual networks for Azure administrators
+  topic: Hybrid connectivity
+  question: Which Azure service is designed for private, dedicated connectivity between an on-premises network and Microsoft cloud services without traversing the public internet?
+  choices:
+  - VPN Gateway
+  - ExpressRoute
+  - Application Gateway
+  - Traffic Manager
+  correct_answer_index: 1
+  correct_answer: ExpressRoute
+  explanation: ExpressRoute provides private connectivity from an edge provider into Microsoft cloud services.
+  source:
+    title: AZ-104 study guide
+    url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+- id: AZ104-030
+  language: en
+  domain: Networking
+  learning_path: Configure and manage virtual networks for Azure administrators
+  topic: Name resolution
+  question: Which Azure service should you use to host and resolve private DNS records for resources inside a virtual network?
+  choices:
+  - Azure DNS private zone
+  - Azure Front Door
+  - Azure CDN
+  - Application Insights
+  correct_answer_index: 0
+  correct_answer: Azure DNS private zone
+  explanation: Private DNS zones provide internal name resolution for private namespaces linked to VNets.
+  source:
+    title: 'AZ-104: Configure and manage virtual networks for Azure administrators'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-virtual-networks/
+- id: AZ104-031
+  language: en
+  domain: Networking
+  learning_path: Configure and manage virtual networks for Azure administrators
+  topic: Routing
+  question: What is the primary purpose of a user-defined route in Azure?
+  choices:
+  - To replicate data across regions
+  - To customize packet forwarding paths in a subnet
+  - To define RBAC inheritance
+  - To enable SAS tokens
+  correct_answer_index: 1
+  correct_answer: To customize packet forwarding paths in a subnet
+  explanation: User-defined routes override system routes to steer traffic to next hops such as virtual appliances.
+  source:
+    title: 'AZ-104: Configure and manage virtual networks for Azure administrators'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-virtual-networks/
+- id: AZ104-032
+  language: en
+  domain: Networking
+  learning_path: Configure and manage virtual networks for Azure administrators
+  topic: Load balancing
+  question: Which Azure service provides Layer 4 load balancing for TCP and UDP traffic?
+  choices:
+  - Azure Application Gateway
+  - Azure Load Balancer
+  - Azure Front Door
+  - Azure DNS
+  correct_answer_index: 1
+  correct_answer: Azure Load Balancer
+  explanation: Azure Load Balancer operates at Layer 4. Application Gateway is Layer 7 for HTTP/HTTPS.
+  source:
+    title: 'AZ-104: Configure and manage virtual networks for Azure administrators'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-virtual-networks/
+- id: AZ104-033
+  language: en
+  domain: Monitoring
+  learning_path: Monitor and back up Azure resources
+  topic: Azure Monitor
+  question: Which service is the primary platform for collecting metrics, logs, alerts, and insights across Azure resources?
+  choices:
+  - Azure Policy
+  - Azure Monitor
+  - Microsoft Purview
+  - Azure Lighthouse
+  correct_answer_index: 1
+  correct_answer: Azure Monitor
+  explanation: Azure Monitor is the central observability platform for metrics, logs, alerts, and workbooks.
+  source:
+    title: 'AZ-104: Monitor and back up Azure resources'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-monitor-backup-resources/
+- id: AZ104-034
+  language: en
+  domain: Monitoring
+  learning_path: Monitor and back up Azure resources
+  topic: Alerts
+  question: What is the function of an action group in Azure Monitor?
+  choices:
+  - It stores backup snapshots
+  - It defines the notifications and automated actions triggered by an alert
+  - It creates subnets automatically
+  - It rotates storage account keys
+  correct_answer_index: 1
+  correct_answer: It defines the notifications and automated actions triggered by an alert
+  explanation: Action groups specify who is notified and what automation runs when alert conditions are met.
+  source:
+    title: Create and manage action groups in Azure Monitor
+    url: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups
+- id: AZ104-035
+  language: en
+  domain: Monitoring
+  learning_path: Monitor and back up Azure resources
+  topic: Metrics vs logs
+  question: Which data type is best suited for near-real-time numeric time-series values such as CPU percentage?
+  choices:
+  - Activity logs
+  - Metrics
+  - Diagnostic settings
+  - Resource locks
+  correct_answer_index: 1
+  correct_answer: Metrics
+  explanation: Metrics are lightweight numeric time-series data optimized for near-real-time alerting and charting.
+  source:
+    title: Overview of Azure Monitor alerts
+    url: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-overview
+- id: AZ104-036
+  language: en
+  domain: Monitoring
+  learning_path: Monitor and back up Azure resources
+  topic: Backup
+  question: Which service should you use to protect supported Azure VMs and other workloads with policy-based backup and retention?
+  choices:
+  - Azure Advisor
+  - Azure Backup
+  - Azure Bastion
+  - Azure Arc
+  correct_answer_index: 1
+  correct_answer: Azure Backup
+  explanation: Azure Backup provides centralized protection and retention for Azure VMs and other supported workloads.
+  source:
+    title: Introduction to Azure Backup
+    url: https://learn.microsoft.com/en-us/training/modules/intro-to-azure-backup/
+- id: AZ104-037
+  language: en
+  domain: Monitoring
+  learning_path: Monitor and back up Azure resources
+  topic: Recovery
+  question: What is the primary purpose of a Recovery Services vault in many AZ-104 backup scenarios?
+  choices:
+  - To host DNS records
+  - To store backup data and manage backup policies
+  - To create NSG rules
+  - To issue SAS tokens
+  correct_answer_index: 1
+  correct_answer: To store backup data and manage backup policies
+  explanation: Recovery Services vaults are logical containers for backup data, policies, and protected items.
+  source:
+    title: Introduction to Azure Backup
+    url: https://learn.microsoft.com/en-us/training/modules/intro-to-azure-backup/
+- id: AZ104-038
+  language: en
+  domain: Monitoring
+  learning_path: Monitor and back up Azure resources
+  topic: Platform events
+  question: Which Azure log records control-plane events such as resource creation, deletion, and RBAC changes at the subscription level?
+  choices:
+  - Guest OS log
+  - Activity log
+  - NSG flow log
+  - Change feed
+  correct_answer_index: 1
+  correct_answer: Activity log
+  explanation: The Azure Activity Log captures subscription-level control-plane operations and service health events.
+  source:
+    title: AZ-104 study guide
+    url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+- id: AZ104-039
+  language: en
+  domain: Monitoring
+  learning_path: Monitor and back up Azure resources
+  topic: Health
+  question: Which Azure capability helps you understand planned maintenance, service issues, and advisories that may affect your subscriptions?
+  choices:
+  - Service Health
+  - Disk Encryption
+  - Azure Files Sync
+  - Azure Container Instances
+  correct_answer_index: 0
+  correct_answer: Service Health
+  explanation: Azure Service Health provides personalized information about incidents, maintenance, and advisories affecting your services.
+  source:
+    title: Create and manage action groups in Azure Monitor
+    url: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups
+- id: AZ104-040
+  language: en
+  domain: Scalability
+  learning_path: Scalability
+  topic: App Service scaling
+  question: In Azure App Service, what does scale out mean?
+  choices:
+  - Move the app to another region
+  - Increase the number of app instances
+  - Increase the size of a single VM
+  - Enable backup retention
+  correct_answer_index: 1
+  correct_answer: Increase the number of app instances
+  explanation: Scale out adds more running instances to handle additional load.
+  source:
+    title: Configure Azure App Service Plans
+    url: https://learn.microsoft.com/en-us/training/modules/configure-app-service-plans/
+- id: AZ104-041
+  language: en
+  domain: Scalability
+  learning_path: Scalability
+  topic: App Service plans
+  question: Which feature allows an App Service plan to adjust instance count automatically based on rules or load?
+  choices:
+  - Resource locks
+  - Autoscale
+  - Management groups
+  - Azure Policy
+  correct_answer_index: 1
+  correct_answer: Autoscale
+  explanation: Autoscale evaluates conditions and adjusts instance count to meet demand while controlling cost.
+  source:
+    title: Configure Azure App Service Plans
+    url: https://learn.microsoft.com/en-us/training/modules/configure-app-service-plans/
+- id: AZ104-042
+  language: en
+  domain: Scalability
+  learning_path: Scalability
+  topic: VMSS
+  question: Which Azure compute option is purpose-built to deploy and manage a set of identical, automatically scaling virtual machines?
+  choices:
+  - Availability sets
+  - Virtual Machine Scale Sets
+  - Azure Bastion
+  - Dedicated hosts
+  correct_answer_index: 1
+  correct_answer: Virtual Machine Scale Sets
+  explanation: Virtual Machine Scale Sets are designed for large-scale, identical VM fleets with autoscaling and orchestration.
+  source:
+    title: Configure Virtual Machine Availability
+    url: https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/
+- id: AZ104-043
+  language: en
+  domain: Scalability
+  learning_path: Scalability
+  topic: Design choices
+  question: A workload experiences unpredictable spikes in HTTP traffic. Which pattern is generally more resilient than increasing one VM to a larger size only?
+  choices:
+  - Vertical scaling only
+  - Horizontal scaling behind a load balancer
+  - Using a resource lock
+  - Moving logs to archive
+  correct_answer_index: 1
+  correct_answer: Horizontal scaling behind a load balancer
+  explanation: Horizontal scaling reduces single-instance dependency and usually improves elasticity for bursty traffic.
+  source:
+    title: Configure Virtual Machine Availability
+    url: https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/
+- id: AZ104-044
+  language: en
+  domain: Scalability
+  learning_path: Scalability
+  topic: Availability zones
+  question: Why can availability zones contribute to both resiliency and scale design?
+  choices:
+  - They remove the need for monitoring
+  - They allow resources to be distributed across physically separate datacenters in a region
+  - They replace RBAC
+  - They store backups automatically
+  correct_answer_index: 1
+  correct_answer: They allow resources to be distributed across physically separate datacenters in a region
+  explanation: Availability zones spread capacity and fault domains across separate datacenter locations in one region.
+  source:
+    title: Configure Virtual Machine Availability
+    url: https://learn.microsoft.com/en-us/training/modules/configure-virtual-machine-availability/
+- id: AZ104-045
+  language: en
+  domain: Scalability
+  learning_path: Scalability
+  topic: Storage scalability
+  question: Which storage service is generally appropriate for massively scalable object storage of unstructured data such as images, backups, and logs?
+  choices:
+  - Azure Blobs
+  - Azure DNS
+  - Azure Bastion
+  - Azure Policy
+  correct_answer_index: 0
+  correct_answer: Azure Blobs
+  explanation: Azure Blob Storage is designed for large-scale object storage and is a common fit for unstructured data.
+  source:
+    title: 'AZ-104: Implement and manage storage in Azure'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-manage-storage/
+- id: AZ104-046
+  language: en
+  domain: Operational Awareness
+  learning_path: Operational Awareness
+  topic: Alerting
+  question: An operations team wants to be notified by email and trigger a webhook whenever CPU stays above threshold. Which Azure Monitor component should they configure alongside the alert rule?
+  choices:
+  - Action group
+  - Management group
+  - Resource lock
+  - Private endpoint
+  correct_answer_index: 0
+  correct_answer: Action group
+  explanation: Action groups define the notification targets and automation actions used by alert rules.
+  source:
+    title: Create and manage action groups in Azure Monitor
+    url: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups
+- id: AZ104-047
+  language: en
+  domain: Operational Awareness
+  learning_path: Operational Awareness
+  topic: Baselines
+  question: What is the main reason to collect baseline metrics for a workload before an incident occurs?
+  choices:
+  - To reduce subnet size
+  - To compare normal behavior against degraded behavior during troubleshooting
+  - To disable backup costs
+  - To assign RBAC roles
+  correct_answer_index: 1
+  correct_answer: To compare normal behavior against degraded behavior during troubleshooting
+  explanation: Operational baselines make anomalies easier to detect and shorten diagnosis time during incidents.
+  source:
+    title: Overview of Azure Monitor alerts
+    url: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/alerts-overview
+- id: AZ104-048
+  language: en
+  domain: Operational Awareness
+  learning_path: Operational Awareness
+  topic: Visibility
+  question: Which Azure capability is most useful for centralized review of platform telemetry, alert state, and resource health trends?
+  choices:
+  - Azure Monitor workbooks and dashboards
+  - Resource locks
+  - Management groups
+  - Availability sets
+  correct_answer_index: 0
+  correct_answer: Azure Monitor workbooks and dashboards
+  explanation: Workbooks and dashboards help teams analyze and visualize telemetry, trends, and operational status.
+  source:
+    title: 'AZ-104: Monitor and back up Azure resources'
+    url: https://learn.microsoft.com/en-us/training/paths/az-104-monitor-backup-resources/
+- id: AZ104-049
+  language: en
+  domain: Operational Awareness
+  learning_path: Operational Awareness
+  topic: Resilience operations
+  question: Which practice most directly improves an administrator's ability to recover from accidental VM data loss?
+  choices:
+  - Rely only on role assignments
+  - Implement and regularly validate backup and restore procedures
+  - Increase subnet count
+  - Disable diagnostic settings
+  correct_answer_index: 1
+  correct_answer: Implement and regularly validate backup and restore procedures
+  explanation: Backups are only operationally reliable if restoration is also tested and understood.
+  source:
+    title: Introduction to Azure Backup
+    url: https://learn.microsoft.com/en-us/training/modules/intro-to-azure-backup/
+- id: AZ104-050
+  language: en
+  domain: Operational Awareness
+  learning_path: Operational Awareness
+  topic: Scope
+  question: Which log is best for reviewing who created, updated, or deleted Azure resources in a subscription?
+  choices:
+  - Azure Activity Log
+  - Blob inventory
+  - Private DNS query log
+  - Boot diagnostics screenshot
+  correct_answer_index: 0
+  correct_answer: Azure Activity Log
+  explanation: The Activity Log records control-plane operations across the subscription and is central for audit-style operational review.
+  source:
+    title: AZ-104 study guide
+    url: https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104
+- id: AZ104-051
+  language: en
+  domain: Operational Awareness
+  learning_path: Operational Awareness
+  topic: Response automation
+  question: You want an alert to start a remediation workflow automatically, not just notify a person. What is the most appropriate design?
+  choices:
+  - Use an action group connected to an automated action such as a webhook or runbook
+  - Increase VM size manually every day
+  - Place the resource in a management group
+  - Create a ReadOnly lock
+  correct_answer_index: 0
+  correct_answer: Use an action group connected to an automated action such as a webhook or runbook
+  explanation: Azure Monitor can use action groups to trigger automated downstream remediation actions.
+  source:
+    title: Create and manage action groups in Azure Monitor
+    url: https://learn.microsoft.com/en-us/azure/azure-monitor/alerts/action-groups
