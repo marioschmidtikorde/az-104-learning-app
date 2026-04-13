@@ -1,12 +1,13 @@
 {
   "name": "az104-learning-app",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "type": "module",
   "private": true,
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "js-yaml": "^4.1.0"
   }
 }
